@@ -1,8 +1,10 @@
 import aiohttp
 import asyncio
-import time
 
 from typing import Tuple
+
+from constsTask2 import WEBSITES, CHECK_INTERVAL
+
 
 async def check(url: str) -> Tuple[bool, float, str]:
     #                  доступен/ноу, время ответа, тип контента/error

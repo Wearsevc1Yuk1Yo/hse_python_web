@@ -1,10 +1,13 @@
 import asyncio
+from datetime import datetime
 
 from .monitorSites import check
 from constsTask2 import WEBSITES, CHECK_INTERVAL
 
 async def monitor():
     while True:
+        print(f"\n Monitoring started at {datetime.now().strftime('%H:%M:%S')}")
+
         tasks = [check(url) for url in WEBSITES]
         # тут все результаты по сайтам
 
