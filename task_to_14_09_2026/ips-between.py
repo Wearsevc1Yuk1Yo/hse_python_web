@@ -6,14 +6,10 @@ import ipaddress
 
 def print_help():
     print("Usage: ips-between.py <ip1> <ip2>")
-    print("[Usage: ips-between.py <ip1> <ip2>]")
     print("\n")
     print("Calculate the number of IP addresses between two given IPs (inclusive start, exclusive end).")
-    print("[Calculate the number of IP addresses between two given IPs (inclusive start, exclusive end).]")
     print("\n")
     print("Example: ips-between.py 192.168.0.1 192.168.0.100")
-    print("[Example: ips-between.py 192.168.0.1 192.168.0.100]")
-
 
 
 def tonum(adress):
@@ -31,6 +27,13 @@ def main():
         print_help()
         return
     
+    if len(sys.argv) != 3:
+        print("Error: Exactly two IP addresses are required.")
+        print("\n")
+        print("Use -h for help.")
+        sys.exit(1)
+    
+
     try:
 
         fadress = sys.argv[1]
