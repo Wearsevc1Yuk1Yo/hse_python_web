@@ -40,7 +40,7 @@ def main():
         sadress = sys.argv[2]
 
         fst = tonum(fadress)
-        snd = tonum(fadress)
+        snd = tonum(sadress)
 
         print(abs(fst - snd))
 
