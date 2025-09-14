@@ -3,23 +3,33 @@ import asyncio
 
 import signal
 
+running = True
+
+def signal_handler(sig, frame):
+    global running
+    print("\n Work done...")
+    running = False
+
 async def main():
-    # задача мониторинга
-    monitor_task = asyncio.create_task(monitor())
-    
-    #  Ctrl+C для остановки
-    def shutdown():
-        print("\n Work done...")
-        monitor_task.cancel()
-    
-    # обработчик сигнала
-    loop = asyncio.get_event_loop()
-    loop.add_signal_handler(signal.SIGINT, shutdown)
-    
+    global running
+    signal.signal(signal.SIGINT, signal_handler)
+    # чтобы стопить безумие
+
     try:
-        await monitor_task
-    except asyncio.CancelledError:
-        print("Monitoring finished")
+
+        # задача мониторинга
+        monitor_task = asyncio.create_task(monitor())
+        while running:
+            await asyncio.sleep(0.1)
+        monitor_task.cancel()
+        # обработчик сигнала
+        try:
+            await monitor_task
+        except asyncio.CancelledError:
+            print("Monitoring stopped")
+
+    except Exception as e:
+        print(f"Error: {e}")
 
 if __name__ == "__main__":
     asyncio.run(main())
