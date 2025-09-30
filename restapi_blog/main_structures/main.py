@@ -1,18 +1,12 @@
 from datetime import datetime
-from fastapi import FastAPI, HTTPException
-# на потом
-from fastapi.responses import HTMLResponse
+from typing import Dict
 
-import json
-import os
 
-app = FastAPI(title="Simple Blog")
+users_db: Dict[int, 'User'] = {}
+posts_db: Dict[int, 'Post'] = {}
 
-users_db = {}
-posts_db = {}
-
-user_id_counter = 1
-post_id_counter = 1
+next_user_id = 1
+next_post_id = 1
 
 # юзер
 class User:
