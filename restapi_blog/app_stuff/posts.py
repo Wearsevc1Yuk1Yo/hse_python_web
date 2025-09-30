@@ -57,3 +57,41 @@ async def get_post(post_id: int):
         "updatedAt": post.updatedAt
     }
 
+async def update(post_id: int, title: str = None, content: str = None):
+    # обновление
+
+    if post_id not in posts_db:
+        raise HTTPException(status_code=404, detail="Пост не найден")
+    
+    post = posts_db[post_id]
+    if title is not None:
+        if not title.strip():
+            raise HTTPException(status_code=400, detail="Заголовок не может быть пустым")
+        post.title = title.strip()
+
+    if content is not None:
+        if not content.strip():
+            raise HTTPException(status_code=400, detail="Содержание не может быть пустым")
+        post.content = content.strip()
+    
+    post.updatedAt = datetime.now()
+    save()
+
+    return {
+        "id": post.id,
+        "authorId": post.authorId,
+        "title": post.title,
+        "content": post.content,
+        "createdAt": post.createdAt,
+        "updatedAt": post.updatedAt
+    }
+
+async def delete_post(post_id: int):
+    # удалить пост 
+    if post_id not in posts_db:
+        raise HTTPException(status_code=404, detail="Пост не найден")
+    
+    del posts_db[post_id]
+    save()
+    
+    return {"message": f"Пост с ID {post_id} удален"}
