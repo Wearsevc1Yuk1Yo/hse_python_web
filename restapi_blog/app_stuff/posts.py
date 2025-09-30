@@ -26,3 +26,34 @@ async def create_post(authorId: int, title: str, content: str):
         "createdAt": new_post.createdAt,
         "updatedAt": new_post.updatedAt
     }
+
+
+async def get_all_posts():
+    # получить-прочитать все посты
+    posts = []
+    for post in posts_db.values():
+        posts.append({
+            "id": post.id,
+            "authorId": post.authorId,
+            "title": post.title,
+            "content": post.content,
+            "createdAt": post.createdAt,
+            "updatedAt": post.updatedAt
+        })
+    return posts
+
+async def get_post(post_id: int):
+    # получить один конкретный по ID
+    if post_id not in posts_db:
+        raise HTTPException(status_code=404, detail="Пост не найден")
+    
+    post = posts_db[post_id]
+    return {
+        "id": post.id,
+        "authorId": post.authorId,
+        "title": post.title,
+        "content": post.content,
+        "createdAt": post.createdAt,
+        "updatedAt": post.updatedAt
+    }
+
