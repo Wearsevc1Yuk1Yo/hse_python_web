@@ -1,0 +1,32 @@
+{
+  "users": {
+    "1": {
+      "id": 1,
+      "email": "eeeeee@mail.ru",
+      "login": "ыыыыы",
+      "password": "ы",
+      "createdAt": "2025-10-01T23:11:45.463940",
+      "updatedAt": "2025-10-01T23:11:45.464033"
+    },
+    "2": {
+      "id": 2,
+      "email": "random@mail.ru",
+      "login": "Oikawa",
+      "password": "a",
+      "createdAt": "2025-10-01T23:56:39.225873",
+      "updatedAt": "2025-10-01T23:56:39.225889"
+    }
+  },
+  "posts": {
+    "2": {
+      "id": 2,
+      "authorId": 1,
+      "title": "Did u know?",
+      "content": "A chicken once lived for 18 months without a head.\r\nMike the chicken's incredible feat was recorded back in the 1940s in the USA. He survived as his jugular vein and most of his brainstem were left mostly intact, ensuring just enough brain function remained for survival. In the majority of cases, a headless chicken dies in a matter of minutes.",
+      "createdAt": "2025-10-02T00:04:51.224784",
+      "updatedAt": "2025-10-02T00:04:51.224788"
+    }
+  },
+  "next_user_id": 1,
+  "next_post_id": 1
+}
