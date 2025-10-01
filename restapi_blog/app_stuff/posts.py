@@ -57,7 +57,7 @@ async def get_post(post_id: int):
         "updatedAt": post.updatedAt
     }
 
-async def update(post_id: int, title: str = None, content: str = None):
+async def update_post(post_id: int, title: str = None, content: str = None):
     # обновление
 
     if post_id not in posts_db:

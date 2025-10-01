@@ -1,9 +1,9 @@
-from datetime import datetime
 from fastapi import HTTPException
+from datetime import datetime
 from main_structures.main import users_db, User
 from storage.files import save
 
-async def create_us(email: str, login: str, password: str):
+async def create_user(email: str, login: str, password: str):
     if not email or not login or not password:
         raise HTTPException(status_code=400, detail="Все поля обязательны: email, login, password")
     
@@ -11,30 +11,17 @@ async def create_us(email: str, login: str, password: str):
         if user.email == email:
              raise HTTPException(status_code=400, detail="Пользователь с таким email уже существует")
 
-    new_us = User(email, login, password)
-    users_db[new_us.id] = new_us
+    new_user = User(email, login, password)
+    users_db[new_user.id] = new_user
     save()
-
 
     return {
-        "id": new_us.id,
-        "email": new_us.email,
-        "login": new_us.login,
-        "createdAt": new_us.createdAt,
-        "updatedAt": new_us.updatedAt
+        "id": new_user.id,
+        "email": new_user.email,
+        "login": new_user.login,
+        "createdAt": new_user.createdAt,
+        "updatedAt": new_user.updatedAt
     }
-
-
-# делитим юзера (почему нет)
-async def delete_user(user_id: int):
-    """Удаляет пользователя"""
-    if user_id not in users_db:
-        raise HTTPException(status_code=404, detail="Пользователь не найден")
-    
-    del users_db[user_id]
-    save()
-    
-    return {"message": f"Пользователь с ID {user_id} удален"}
 
 async def get_all_users():
     users_list = []
@@ -68,9 +55,15 @@ async def update_user(user_id: int, email: str = None, login: str = None, passwo
     user = users_db[user_id]
     
     if email is not None:
+        # Проверка уникальности email
+        for uid, existing_user in users_db.items():
+            if existing_user.email == email and uid != user_id:
+                raise HTTPException(status_code=400, detail="Email уже используется")
         user.email = email
+    
     if login is not None:
         user.login = login
+    
     if password is not None:
         user.password = password
     
@@ -84,3 +77,12 @@ async def update_user(user_id: int, email: str = None, login: str = None, passwo
         "createdAt": user.createdAt,
         "updatedAt": user.updatedAt
     }
+
+async def delete_user(user_id: int):
+    if user_id not in users_db:
+        raise HTTPException(status_code=404, detail="Пользователь не найден")
+    
+    del users_db[user_id]
+    save()
+    
+    return {"message": f"Пользователь с ID {user_id} удален"}

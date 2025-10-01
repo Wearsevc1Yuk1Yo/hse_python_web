@@ -56,31 +56,31 @@ async def api_update_post(post_id: int, title: str = None, content: str = None):
 async def api_delete_post(post_id: int):
     return await posts.delete_post(post_id)
 
-# PAGES  -----------------------------------------------------------
+# PAGES -----------------------------------------------------------
 
 @app.get("/", response_class=HTMLResponse)
 async def home_page():
-    html_content = pages.home_page()
+    html_content = pages.mainpage()
     return HTMLResponse(content=html_content)
 
 @app.get("/post/{post_id}", response_class=HTMLResponse)
 async def view_post_page(post_id: int):
-    html_content = pages.view_post_page(post_id)
+    html_content = pages.viewed_post(post_id)
     return HTMLResponse(content=html_content)
 
 @app.get("/create-post", response_class=HTMLResponse)
 async def create_post_page():
-    html_content = pages.create_post_form()
+    html_content = pages.create_post()
     return HTMLResponse(content=html_content)
 
 @app.get("/edit-post/{post_id}", response_class=HTMLResponse)
 async def edit_post_page(post_id: int):
-    html_content = pages.edit_post_form(post_id)
+    html_content = pages.edit_post(post_id)
     return HTMLResponse(content=html_content)
 
 @app.get("/create-user", response_class=HTMLResponse)
 async def create_user_page():
-    html_content = pages.create_user_form()
+    html_content = pages.create_user()
     return HTMLResponse(content=html_content)
 
 # formsss  -----------------------------------------------------------
