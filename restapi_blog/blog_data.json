@@ -15,6 +15,14 @@
       "password": "a",
       "createdAt": "2025-10-01T23:56:39.225873",
       "updatedAt": "2025-10-01T23:56:39.225889"
+    },
+    "3": {
+      "id": 3,
+      "email": "bro@mail.ru",
+      "login": "asdfghjkl",
+      "password": "axdsdvbg",
+      "createdAt": "2025-10-02T00:42:13.267345",
+      "updatedAt": "2025-10-02T00:42:13.267361"
     }
   },
   "posts": {
