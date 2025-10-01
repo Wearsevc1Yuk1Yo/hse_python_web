@@ -13,6 +13,35 @@ load()
 print("✅ Модули загружены")
 print("✅ Данные загружены из файла")
 
+# errorssssssssss ------------------------------------------------
+@app.exception_handler(404)
+async def not_found_exception_handler(request: Request, exc: HTTPException):
+    """Обработчик для 404 ошибок"""
+    error_html = pages.error_page(
+        "404 - Страница не найдена", 
+        "Запрошенная страница не существует. Проверьте URL или вернитесь на главную."
+    )
+    return HTMLResponse(content=error_html, status_code=404)
+
+@app.exception_handler(400)
+async def bad_request_exception_handler(request: Request, exc: HTTPException):
+    """Обработчик для 400 ошибок"""
+    error_html = pages.error_page(
+        "400 - Ошибка валидации", 
+        exc.detail or "Неверные данные. Пожалуйста, проверьте введенную информацию."
+    )
+    return HTMLResponse(content=error_html, status_code=400)
+
+@app.exception_handler(500)
+async def internal_server_error_handler(request: Request, exc: Exception):
+    """Обработчик для 500 ошибок"""
+    error_html = pages.error_page(
+        "500 - Внутренняя ошибка сервера", 
+        "Что-то пошло не так. Пожалуйста, попробуйте позже."
+    )
+    return HTMLResponse(content=error_html, status_code=500)
+
+
 # USERS -----------------------------------------------------------
 @app.post("/api/users/")
 async def api_create_user(email: str, login: str, password: str):

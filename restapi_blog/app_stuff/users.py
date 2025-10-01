@@ -4,12 +4,26 @@ from main_structures.main import users_db, User
 from storage.files import save
 
 async def create_user(email: str, login: str, password: str):
+    # valid input весь вообще
     if not email or not login or not password:
         raise HTTPException(status_code=400, detail="Все поля обязательны: email, login, password")
     
+    # valid email
+    if "@" not in email or "." not in email:
+        raise HTTPException(status_code=400, detail="Некорректный формат email")
+    
+    # valid password
+    if len(password) < 3:
+        raise HTTPException(status_code=400, detail="Пароль должен содержать минимум 3 символа")
+    
+    # valid log
+    if len(login) < 2:
+        raise HTTPException(status_code=400, detail="Логин должен содержать минимум 2 символа")
+    
+    # unique email
     for user in users_db.values():
         if user.email == email:
-             raise HTTPException(status_code=400, detail="Пользователь с таким email уже существует")
+            raise HTTPException(status_code=400, detail="Пользователь с таким email уже существует")
 
     new_user = User(email, login, password)
     users_db[new_user.id] = new_user

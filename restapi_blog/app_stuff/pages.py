@@ -24,7 +24,19 @@ def make_html_page(title: str, content: str):
     </html>
     """
 
-def get_author_name(author_id: int):  # переименовали функцию
+def error_page(title: str, message: str):
+    """Генерирует страницу с ошибкой"""
+    error_content = f"""
+    <div class="error-container">
+        <div class="error-icon">⚠️</div>
+        <div class="error-title">{title}</div>
+        <div class="error-message">{message}</div>
+        <a href="/" class="btn-primary">Вернуться на главную</a>
+    </div>
+    """
+    return make_html_page("Ошибка", error_content)
+
+def get_author_name(author_id: int):
     if author_id in users_db:
         return users_db[author_id].login
     return "Неизвестный автор"
@@ -39,7 +51,7 @@ def mainpage():
             posts_list.sort(key=lambda x: x.id, reverse=True)
             
             for post in posts_list:
-                author = get_author_name(post.authorId)  # используем переименованную функцию
+                author = get_author_name(post.authorId)
                 content_preview = post.content[:100] + "..." if len(post.content) > 100 else post.content
                 posts_html += f"""
                 <div class="post">
@@ -72,7 +84,7 @@ def viewed_post(post_id: int):
             return "Пост не найден"
         
         post = posts_db[post_id]
-        author = get_author_name(post.authorId)  # используем переименованную функцию
+        author = get_author_name(post.authorId)
         
         content = f"""
         <div class="post">
