@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Мой Блог{% endblock %}</title>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        .post { border: 1px solid #ccc; padding: 15px; margin: 10px 0; }
+        .nav { margin: 20px 0; }
+        form { max-width: 600px; }
+        input, textarea, select { width: 100%; padding: 8px; margin: 5px 0; }
+        button { background: #4CAF50; color: white; padding: 10px; border: none; cursor: pointer; }
+        .error-container { text-align: center; margin: 50px 0; }
+    </style>
+</head>
+<body>
+    <h1>{% block header %}Мой Блог{% endblock %}</h1>
+    {% block content %}{% endblock %}
+</body>
+</html>

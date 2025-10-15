@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Регистрация</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Регистрация</h1>
+
+        {% if current_user %}
+        <div class="alert alert-info">
+            Вы уже вошли как: <strong>{{ current_user.login }}</strong>
+        </div>
+        {% endif %}
+
+        <div class="auth-form">
+            <form method="post" action="/register">
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" name="email" required placeholder="user@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Логин:</label>
+                    <input type="text" name="login" required placeholder="Ваш логин">
+                </div>
+                <div class="form-group">
+                    <label>Пароль:</label>
+                    <input type="password" name="password" required placeholder="Минимум 3 символа">
+                </div>
+                <button type="submit" class="btn-primary">Зарегистрироваться</button>
+            </form>
+            
+            <div class="auth-links">
+                <p>Уже есть аккаунт? <a href="/login">Войдите</a></p>
+                <p><a href="/">← На главную</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

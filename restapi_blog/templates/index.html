@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Мой Блог</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Мой Блог</h1>
+            
+            <!-- Панель пользователя -->
+            <div class="user-panel">
+                {% if current_user %}
+                    <div class="user-info">
+                        <span>Вы вошли как: <strong>{{ current_user.login }}</strong></span>
+                        <div class="user-actions">
+                            <a href="/logout" class="btn-secondary">Выйти</a>
+                            
+                            <!-- Переключение между пользователями -->
+                            {% if all_users|length > 1 %}
+                            <div class="user-switcher">
+                                <span>Переключиться на:</span>
+                                <select onchange="switchUser(this.value)">
+                                    <option value="">Выберите пользователя</option>
+                                    {% for user in all_users %}
+                                        {% if user.id != current_user.id %}
+                                        <option value="{{ user.id }}">{{ user.login }} ({{ user.email }})</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="auth-links">
+                        <a href="/login" class="btn-primary">Войти</a>
+                        <a href="/register" class="btn-secondary">Регистрация</a>
+                    </div>
+                {% endif %}
+            </div>
+        </header>
+
+        <!-- Навигация -->
+        <div class="nav">
+            {% if current_user %}
+                <a href="/create-post" class="btn-success">📝 Создать пост</a>
+            {% endif %}
+            <a href="/api/users">📊 API пользователей</a>
+            <a href="/api/posts">📄 API постов</a>
+        </div>
+
+        <!-- Уведомление если нет пользователей -->
+        {% if not has_users %}
+        <div class="alert alert-warning">
+            <h3>👋 Добро пожаловать!</h3>
+            <p>Чтобы начать пользоваться блогом, сначала создайте пользователя:</p>
+            <p><a href="/register" class="btn-primary">Создать первого пользователя</a></p>
+        </div>
+        {% endif %}
+
+        <!-- Список постов -->
+        {% if not posts %}
+            {% if has_users and current_user %}
+                <p>Пока нет постов. <a href="/create-post">Создайте первый!</a></p>
+            {% elif has_users and not current_user %}
+                <p>Пока нет постов. <a href="/login">Войдите</a> чтобы создать первый пост!</p>
+            {% endif %}
+        {% else %}
+            <div class="posts-list">
+                {% for post in posts %}
+                    <div class="post">
+                        <h3><a href="/post/{{ post.id }}">{{ post.title }}</a></h3>
+                        <p class="post-meta">
+                            <strong>Автор:</strong> {{ post.author_name }} | 
+                            <strong>Дата:</strong> {{ post.created_at }}
+                        </p>
+                        <p class="post-preview">{{ post.content_preview }}</p>
+                        <div class="post-actions">
+                            <a href="/post/{{ post.id }}">Читать полностью</a>
+                            {% if current_user and current_user.id == post.author_id %}
+                            | <a href="/edit-post/{{ post.id }}">Редактировать</a>
+                            | <a href="/delete-post/{{ post.id }}" onclick="return confirm('Удалить этот пост?')">Удалить</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function switchUser(userId) {
+            if (userId) {
+                window.location.href = '/switch-user/' + userId;
+            }
+        }
+    </script>
+</body>
+</html>

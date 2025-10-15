@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Создание поста</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Создание поста</h1>
+
+        <div class="post-info">
+            <p>Вы создаете пост как: <strong>{{ current_user.login }}</strong></p>
+        </div>
+
+        <form method="post" action="/create-post">
+            <div class="form-group">
+                <label>Заголовок:</label>
+                <input type="text" name="title" required placeholder="Введите заголовок поста">
+            </div>
+            <div class="form-group">
+                <label>Содержание:</label>
+                <textarea name="content" rows="10" required placeholder="Напишите содержание поста..."></textarea>
+            </div>
+            <button type="submit" class="btn-primary">Создать пост</button>
+        </form>
+        
+        <div class="nav">
+            <a href="/">← На главную</a>
+        </div>
+    </div>
+</body>
+</html>

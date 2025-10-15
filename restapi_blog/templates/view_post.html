@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+{% block header %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <div class="post">
+        <h2>{{ post.title }}</h2>
+        <p><strong>Автор:</strong> {{ post.author_name }}</p>
+        <p><strong>Создан:</strong> {{ post.created_at }}</p>
+        <p><strong>Обновлен:</strong> {{ post.updated_at }}</p>
+        <div style="white-space: pre-line; margin: 20px 0;">{{ post.content }}</div>
+    </div>
+    <div class="nav">
+        <a href="/">← На главную</a> | 
+        <a href="/edit-post/{{ post.id }}">✏️ Редактировать</a> |
+        <a href="/delete-post/{{ post.id }}" onclick="return confirm('Удалить этот пост?')">🗑 Удалить</a>
+    </div>
+{% endblock %}

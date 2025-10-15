@@ -3,36 +3,44 @@
     "1": {
       "id": 1,
       "email": "eeeeee@mail.ru",
-      "login": "ыыыыы",
-      "password": "ы",
-      "createdAt": "2025-10-01T23:11:45.463940",
-      "updatedAt": "2025-10-01T23:11:45.464033"
+      "login": "hse_lyc2425-cpp-20",
+      "password": "sdghjkl",
+      "created_at": "2025-10-16T01:37:51.653475",
+      "updated_at": "2025-10-16T01:37:51.653507"
     },
     "2": {
       "id": 2,
-      "email": "random@mail.ru",
-      "login": "Oikawa",
-      "password": "a",
-      "createdAt": "2025-10-01T23:56:39.225873",
-      "updatedAt": "2025-10-01T23:56:39.225889"
-    },
-    "3": {
-      "id": 3,
-      "email": "bro@mail.ru",
-      "login": "asdfghjkl",
-      "password": "axdsdvbg",
-      "createdAt": "2025-10-02T00:42:13.267345",
-      "updatedAt": "2025-10-02T00:42:13.267361"
+      "email": "rtb@eu.ieyr",
+      "login": "fffff",
+      "password": "fff",
+      "created_at": "2025-10-16T02:13:09.550812",
+      "updated_at": "2025-10-16T02:13:09.550816"
     }
   },
   "posts": {
+    "1": {
+      "id": 1,
+      "author_id": 1,
+      "title": "hdh",
+      "content": "bcbdfbdfbыФЫРРО",
+      "created_at": "2025-10-16T01:38:00.751314",
+      "updated_at": "2025-10-16T01:40:04.795227"
+    },
     "2": {
       "id": 2,
-      "authorId": 1,
-      "title": "Did u know?",
-      "content": "A chicken once lived for 18 months without a head.\r\nMike the chicken's incredible feat was recorded back in the 1940s in the USA. He survived as his jugular vein and most of his brainstem were left mostly intact, ensuring just enough brain function remained for survival. In the majority of cases, a headless chicken dies in a matter of minutes.",
-      "createdAt": "2025-10-02T00:04:51.224784",
-      "updatedAt": "2025-10-02T00:04:51.224788"
+      "author_id": 1,
+      "title": "ЫВПР",
+      "content": "ВАПРОЛБЮ.",
+      "created_at": "2025-10-16T01:40:18.418011",
+      "updated_at": "2025-10-16T01:40:18.418016"
+    },
+    "3": {
+      "id": 3,
+      "author_id": 2,
+      "title": "sdghnjmk./",
+      "content": "dsfdgnhmj,,.",
+      "created_at": "2025-10-16T02:13:16.637645",
+      "updated_at": "2025-10-16T02:13:16.637649"
     }
   },
   "next_user_id": 1,
